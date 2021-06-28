@@ -1,7 +1,6 @@
 /* eslint-disable no-restricted-syntax */
 import { Injectable, Optional } from '@angular/core';
 import { LoggerConfig } from './logger.config';
-import { config } from 'rxjs';
 import { LogFormatterService } from './log-formatter.service';
 
 @Injectable({
