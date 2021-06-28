@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoggerService } from '@flight-workspace/logger-lib';
+import { AuthLibService } from '@flight-workspace/shared/auth-lib';
 
 @Component({
   selector: 'flight-app',
@@ -7,7 +8,13 @@ import { LoggerService } from '@flight-workspace/logger-lib';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  constructor(private loggerService: LoggerService) {}
+  constructor(
+    private loggerService: LoggerService,
+    private authService: AuthLibService
+  ) {
+    this.authService.login('Max', null);
+    console.log(this.authService.user);
+  }
 
   ngOnInit(): void {
     this.loggerService.log('Application is running');

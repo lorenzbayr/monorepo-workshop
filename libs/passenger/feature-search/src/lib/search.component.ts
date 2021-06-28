@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { Passenger, SearchFacade } from '@flight-workspace/passenger/domain';
+import { AuthLibService } from '@flight-workspace/shared/auth-lib';
 
 @Component({
   selector: 'passenger-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+  styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent {
   firstname = '';
@@ -12,17 +13,20 @@ export class SearchComponent {
   passengerList$ = this.searchFacade.passengerList$;
   selectedPassenger: Passenger;
 
-  constructor(private searchFacade: SearchFacade) {
+  user = this.authService.user;
+
+  constructor(
+    private searchFacade: SearchFacade,
+    private authService: AuthLibService
+  ) {
+    console.log(authService.user);
   }
 
   load(): void {
     this.searchFacade.load(this.name, this.firstname);
-  };
+  }
 
   toggleSelection(p: Passenger) {
-    this.selectedPassenger =
-      this.selectedPassenger === p ?
-      null :
-      p;
+    this.selectedPassenger = this.selectedPassenger === p ? null : p;
   }
 }
