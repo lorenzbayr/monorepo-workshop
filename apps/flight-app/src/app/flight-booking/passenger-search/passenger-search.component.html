@@ -1,0 +1,37 @@
+<p>passenger-search works!</p>
+
+<div class="passengers-layout">
+  <div>
+    <ul *ngIf="passengers$ | async as passengers">
+      <li *ngFor="let passenger of passengers">
+        <a style="cursor: pointer" (click)="selectPassenger(passenger)"
+          >{{ passenger.name }} {{ passenger.firstName }}</a
+        >
+      </li>
+    </ul>
+    <button (click)="create()">create</button>
+  </div>
+  <div *ngIf="selectedPassenger">
+    <form
+      class="passenger-form"
+      [formGroup]="passengerForm"
+      (ngSubmit)="submit()"
+    >
+      <label for="name">Name</label>
+      <input id="name" type="text" formControlName="name" />
+      <label for="firstName">First Name</label>
+      <input id="firstName" type="text" formControlName="firstName" />
+      <label for="passengerStatus">Status</label>
+      <input
+        id="passengerStatus"
+        type="text"
+        formControlName="passengerStatus"
+      />
+      <label for="bonusMiles">Bonus Miles</label>
+      <input id="bonusMiles" type="number" formControlName="bonusMiles" />
+      <div style="margin-top: 10px">
+        <button>Save</button>
+      </div>
+    </form>
+  </div>
+</div>
